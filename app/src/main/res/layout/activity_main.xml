@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="RSRP"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="RSRQ"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="SNR"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1">
+
+            <ProgressBar
+                android:id="@+id/rsrp_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:max="-60"
+                android:min="-110"
+                android:progressBackgroundTint="@android:color/white"
+                android:scaleY="12" />
+
+            <TextView
+                android:id="@+id/rsrp_value"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="-11.7"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1">
+
+            <ProgressBar
+                android:id="@+id/rsrq_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:max="-3"
+                android:min="-19"
+
+                android:progressBackgroundTint="@android:color/white"
+                android:scaleY="12" />
+
+            <TextView
+                android:id="@+id/rsrq_value"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="-107"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1">
+
+            <ProgressBar
+                android:id="@+id/snr_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:max="30"
+                android:min="0"
+
+                android:progressBackgroundTint="@android:color/white"
+                android:scaleY="12" />
+
+            <TextView
+                android:id="@+id/snr_value"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="-17.67"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/activity_main_linechart"
+        android:layout_width="match_parent"
+
+        android:layout_height="fill_parent" />
+
+</LinearLayout>
