@@ -17,7 +17,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="RSRP"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="20sp" />
 
         <TextView
@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="RSRQ"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="20sp" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="SNR"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -129,10 +129,86 @@
 
         </RelativeLayout>
     </LinearLayout>
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/activity_main_linechart"
-        android:layout_width="match_parent"
 
-        android:layout_height="fill_parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/activity_main_linechart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/o1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/o2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+
+            android:textColor="#000"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/o3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+
+            android:textColor="#000"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/o4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+
+            android:textColor="#000"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/o5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1"
+            android:gravity="center"
+
+            android:textColor="#000"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/o6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="12sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

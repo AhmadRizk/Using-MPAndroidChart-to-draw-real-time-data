@@ -3,6 +3,7 @@ package com.example.digissquared;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -18,12 +19,17 @@ import com.example.api.ApiServices;
 import com.example.models.DataModel;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -34,11 +40,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -53,11 +61,13 @@ public class MainActivity extends AppCompatActivity {
     TextView mTvRSRPValue, mTvRSRQValue, mTvSNRValue;
     ArrayList<HashMap<String, String>> SNIR, RSRP, RSRQ;
     int receivedRSRP, receivedRSRQ, receivedSNIR;
-    TextView tvRSRP, tvRSRQ, tvSNIR;
+    TextView tvRSRP, tvRSRQ, tvSNIR, o1, o2, o3, o4, o5, o6;
     String rsrpColor, rsrqColor, snirColor;
     private LineChart lineChart;
     ArrayList<Entry> rsrpArray, rsrqArray, snirArray;
     Float rsrp, rsrq, snir, timer = 0f;
+    double z = 0.00;
+    Calendar c;
 
 
     @Override
@@ -128,22 +138,13 @@ public class MainActivity extends AppCompatActivity {
         rsrqArray = new ArrayList<>();
         snirArray = new ArrayList<>();
 
-        lineChart = findViewById(R.id.activity_main_linechart);
-        XAxis xAxis = lineChart.getXAxis();
-        XAxis.XAxisPosition position = XAxis.XAxisPosition.BOTTOM;
-        xAxis.setPosition(position);
-        xAxis.setDrawLimitLinesBehindData(true);
 
-        xAxis.setValueFormatter(new ValueFormatter() {
-            private final SimpleDateFormat mFormat = new SimpleDateFormat("mm ss", Locale.ENGLISH);
-
-            @Override
-            public String getFormattedValue(float value) {
-//                long millis = (long) value * 2000L;
-                return mFormat.format(new Date());
-            }
-        });
-
+        o1 = findViewById(R.id.o1);
+        o2 = findViewById(R.id.o2);
+        o3 = findViewById(R.id.o3);
+        o4 = findViewById(R.id.o4);
+        o5 = findViewById(R.id.o5);
+        o6 = findViewById(R.id.o6);
 
 
         tvRSRP = findViewById(R.id.rsrp_value);
@@ -174,9 +175,24 @@ public class MainActivity extends AppCompatActivity {
                 GetData();
                 timer++;
                 configureLineChart();
-                ;
+
+
             }
         }, 0, 2000);
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                configureLineChart();
+                c = Calendar.getInstance();
+                o1.setText(setOValue(0));
+                o2.setText(setOValue(10));
+                o3.setText(setOValue(20));
+                o4.setText(setOValue(30));
+                o5.setText(setOValue(40));
+                o6.setText(setOValue(50));
+
+            }
+        }, 0, 60000);
 
     }
 
@@ -248,16 +264,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configureLineChart() {
+        c=Calendar.getInstance();
+        lineChart = findViewById(R.id.activity_main_linechart);
+
         Description desc = new Description();
         desc.setText("DIGIS Squared");
-        desc.setTextSize(28);
+        desc.setTextSize(18);
         lineChart.setDescription(desc);
         lineChart.setTouchEnabled(true);
         lineChart.setPinchZoom(true);
         lineChart.getAxisLeft().setDrawGridLines(false);
         lineChart.getXAxis().setDrawGridLines(false);
 
-            }
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setDrawLabels(false);
+
+
+
+
+
+    }
 
     private void setLineChartData(ArrayList<Entry> rsrpArr, ArrayList<Entry> rsrqArr, ArrayList<Entry> snirArr) {
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
@@ -294,6 +320,7 @@ public class MainActivity extends AppCompatActivity {
 
         LineData lineData = new LineData(dataSets);
         lineChart.setData(lineData);
+
         lineChart.invalidate();
     }
 
@@ -318,6 +345,18 @@ public class MainActivity extends AppCompatActivity {
         setLineChartData(rsrpArray, rsrqArray, snirArray);
 
 
+    }
+
+    // setting the value for the xAxis
+    public String setOValue(int x) {
+
+        SimpleDateFormat mFormat = new SimpleDateFormat("mm.ss", Locale.ENGLISH);
+
+        c.setTime(new Date());
+        c.add(Calendar.SECOND, x);
+        Date current = c.getTime();
+        Log.d("zzzzz", "initViews: " + z + "  " + mFormat.format(current));
+        return mFormat.format(current);
     }
 
 }
